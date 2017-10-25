@@ -1,4 +1,4 @@
-package com.elifakay.onlineenglishwordapp;
+package com.elifakay.englishwordapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.elifakay.onlineenglishwordapp", appContext.getPackageName());
+        assertEquals("com.elifakay.englishwordapp", appContext.getPackageName());
     }
 }

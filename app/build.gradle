@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.elifakay.onlineenglishwordapp"
+        applicationId "com.elifakay.englishwordapp"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1

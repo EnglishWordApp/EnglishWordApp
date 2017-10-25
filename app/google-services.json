@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "948949764338",
-    "firebase_url": "https://onlineenglishwordapp.firebaseio.com",
-    "project_id": "onlineenglishwordapp",
-    "storage_bucket": "onlineenglishwordapp.appspot.com"
+    "project_number": "538284608478",
+    "firebase_url": "https://englishwordapp.firebaseio.com",
+    "project_id": "englishwordapp",
+    "storage_bucket": "englishwordapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:948949764338:android:a043b2fdcd419132",
+        "mobilesdk_app_id": "1:538284608478:android:f1b29228ce9f659c",
         "android_client_info": {
-          "package_name": "com.elifakay.onlineenglishwordapp"
+          "package_name": "com.elifakay.englishwordapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "948949764338-obonc5c2ro45o1sdtjdqjkv64vf7q324.apps.googleusercontent.com",
+          "client_id": "538284608478-64juk1srbveq4n3g6hp642oebi1leg1n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.elifakay.onlineenglishwordapp",
+            "package_name": "com.elifakay.englishwordapp",
             "certificate_hash": "9c8405baf8592f29f75a1ceee5ab7c19fbb314fd"
           }
         },
         {
-          "client_id": "948949764338-eb5n7duhlbrr0skru9dics1n7vpirjfr.apps.googleusercontent.com",
+          "client_id": "538284608478-f12rbes53f8aoa44128rlgt4qi7gc4ad.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAvaEwWrUQnJe25FRRAIxBw1IrA-iJv3sE"
+          "current_key": "AIzaSyAUL730MILcIs87vPTKj7ZLXmdWKX8VMhg"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "948949764338-eb5n7duhlbrr0skru9dics1n7vpirjfr.apps.googleusercontent.com",
+              "client_id": "538284608478-f12rbes53f8aoa44128rlgt4qi7gc4ad.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

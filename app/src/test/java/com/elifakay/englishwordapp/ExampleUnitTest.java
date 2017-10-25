@@ -1,4 +1,4 @@
-package com.elifakay.onlineenglishwordapp;
+package com.elifakay.englishwordapp;
 
 import org.junit.Test;
 
