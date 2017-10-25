@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "948949764338",
+    "firebase_url": "https://onlineenglishwordapp.firebaseio.com",
+    "project_id": "onlineenglishwordapp",
+    "storage_bucket": "onlineenglishwordapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948949764338:android:a043b2fdcd419132",
+        "android_client_info": {
+          "package_name": "com.elifakay.onlineenglishwordapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948949764338-obonc5c2ro45o1sdtjdqjkv64vf7q324.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elifakay.onlineenglishwordapp",
+            "certificate_hash": "9c8405baf8592f29f75a1ceee5ab7c19fbb314fd"
+          }
+        },
+        {
+          "client_id": "948949764338-eb5n7duhlbrr0skru9dics1n7vpirjfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvaEwWrUQnJe25FRRAIxBw1IrA-iJv3sE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948949764338-eb5n7duhlbrr0skru9dics1n7vpirjfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
