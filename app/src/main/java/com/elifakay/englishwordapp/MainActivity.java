@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         edtUserName = (MaterialEditText) findViewById(R.id.edtUserName);
         edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
 
-
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
