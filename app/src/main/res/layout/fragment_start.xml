@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.elifakay.englishwordapp.RankingFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context="com.elifakay.englishwordapp.StartActivity">
+    android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imgLogo"
         android:src="@mipmap/logo"
@@ -17,24 +18,25 @@
         android:layout_height="200dp" />
 
     <android.support.v7.widget.CardView
-        app:cardElevation="4dp"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        app:cardElevation="4dp">
 
         <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/btnPlay"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@color/colorGreen"
+            android:background="@color/textColor"
             android:foreground="?android:attr/selectableItemBackground"
             android:text="PLAY"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:theme="@style/MyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:theme="@style/MyButton" />
 
     </android.support.v7.widget.CardView>
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

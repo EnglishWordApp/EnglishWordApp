@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">OnlineEnglishWordApp</string>
+    <string name="app_name">EnglishWordApp</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="user_name">User Name</string>
     <string name="sign_in">SIGN IN</string>
     <string name="sign_up">SIGN UP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -5,7 +5,6 @@ package com.elifakay.englishwordapp.Model;
  */
 
 public class QuestionScore {
-    private String QuestionScore;
     private String User;
     private String Score;
 
@@ -13,19 +12,10 @@ public class QuestionScore {
     {
 
     }
-    public QuestionScore(String questionScore,String user,String score)
+    public QuestionScore(String user,String score)
     {
-        this.QuestionScore=questionScore;
         this.User=user;
         this.Score=score;
-    }
-
-    public String getQuestionScore() {
-        return QuestionScore;
-    }
-
-    public void setQuestionScore(String questionScore) {
-        QuestionScore = questionScore;
     }
 
     public String getUser() {

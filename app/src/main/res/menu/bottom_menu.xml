@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_start"
+        android:enabled="true"
+        android:icon="@drawable/ic_library_books_black_24dp"
+        android:title="Start"
+        tools:ignore="MenuTitle,UnusedAttribute" />
+    <item
         android:id="@+id/action_profile"
         android:enabled="true"
         android:title="Profile"
@@ -17,7 +23,7 @@
         android:title="Ranking"
         tools:ignore="MenuTitle,UnusedAttribute" />
     <item
-        android:id="@+id/action_info"
+        android:id="@+id/action_about"
         android:enabled="true"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="About"

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context="com.elifakay.englishwordapp.PlayingActivity">
 
     <ImageView
@@ -21,11 +20,13 @@
     <TextView
         android:id="@+id/txtQuestion"
         android:visibility="invisible"
-        android:textColor="@android:color/white"
+        android:textColor="@color/textColor"
         android:gravity="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="15dp"
         android:layout_above="@+id/relativeLayout"
         android:layout_alignParentStart="true" />
 
@@ -52,12 +53,11 @@
 
                 <TextView
                     android:id="@+id/txtScore"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textColor"
                     android:gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:text="0"
                     android:textSize="36sp"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -66,10 +66,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="210dp"
+                    android:layout_marginLeft="190dp"
                     android:text="1/30"
-                    android:textColor="@android:color/white"
-                    android:textSize="36sp" />
+                    android:textColor="@color/textColor"
+                    android:textSize="36sp"
+                    android:layout_weight="0.29" />
 
             </LinearLayout>
 
@@ -84,52 +85,59 @@
 
             <Button
                 android:id="@+id/btnAnswerA"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/buttonColor"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="Answer A"
                 android:textColor="@android:color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:theme="@style/MyButton"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="@color/colorLight"
-                android:layout_margin="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:theme="@style/MyButton" />
+
             <Button
                 android:id="@+id/btnAnswerB"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/buttonColor"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="Answer B"
                 android:textColor="@android:color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:theme="@style/MyButton"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="@color/colorLight"
-                android:layout_margin="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:theme="@style/MyButton" />
+
             <Button
                 android:id="@+id/btnAnswerC"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/buttonColor"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="Answer C"
                 android:textColor="@android:color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:theme="@style/MyButton"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="@color/colorLight"
-                android:layout_margin="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:theme="@style/MyButton" />
+
             <Button
                 android:id="@+id/btnAnswerD"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/buttonColor"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="Answer D"
                 android:textColor="@android:color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:theme="@style/MyButton"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="@color/colorLight"
-                android:layout_margin="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:theme="@style/MyButton" />
 
         </LinearLayout>
     </RelativeLayout>
