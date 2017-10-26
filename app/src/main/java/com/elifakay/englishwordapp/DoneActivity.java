@@ -52,8 +52,8 @@ public class DoneActivity extends AppCompatActivity {
             int totalQuestion = extra.getInt("TOTAL");
             int correctAnswer = extra.getInt("CORRECT");
 
-            txtResultScore.setText(String.format("SKOR : %d", score));
-            txtDoneTotalQuestion.setText(String.format("GEÇTİ : %d / %d", correctAnswer, totalQuestion));
+            txtResultScore.setText(String.format("SCORE : %d", score));
+            txtDoneTotalQuestion.setText(String.format("PASSED : %d / %d", correctAnswer, totalQuestion));
 
             progressBar.setMax(totalQuestion);
             progressBar.setProgress(correctAnswer);
