@@ -2,31 +2,36 @@ package com.elifakay.englishwordapp;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elifakay.englishwordapp.Common.Common;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import java.util.Locale;
 
 public class PlayingActivity extends AppCompatActivity implements View.OnClickListener {
 
     final static long INTERVAL=1000; //1 sec
-    final static long TIMEOUT=7000; //7 sec
+    final static long TIMEOUT=11000; //11 sec
     int progressValue=0;
 
     CountDownTimer countDownTimer;
 
     int index=0,score=0,thisQuestion=0,totalQuestion,correctAnswer;
 
-    //Firebase
-    /*FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseRefQuestion;
-    */
     ProgressBar progressBar;
     ImageView imgQuestion;
     Button btnA,btnB,btnC,btnD;
@@ -37,10 +42,6 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
 
-        //Firebase
-        /*firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseRefQuestion=firebaseDatabase.getReference("Questions");
-        */
         txtScore=(TextView)findViewById(R.id.txtScore);
         txtQuestionNum=(TextView)findViewById(R.id.txtTotalQuestion);
         txtQuestion=(TextView)findViewById(R.id.txtQuestion);
@@ -57,6 +58,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         btnB.setOnClickListener(this);
         btnC.setOnClickListener(this);
         btnD.setOnClickListener(this);
+
     }
 
     @Override

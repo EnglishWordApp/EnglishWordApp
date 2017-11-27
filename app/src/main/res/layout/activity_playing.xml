@@ -19,16 +19,19 @@
 
     <TextView
         android:id="@+id/txtQuestion"
-        android:visibility="invisible"
-        android:textColor="@color/textColor"
-        android:gravity="center"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:layout_above="@+id/relativeLayout"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="15dp"
+        android:layout_toStartOf="@+id/imgBtnTextToSpeech"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        tools:ignore="UnknownId" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"
@@ -43,7 +46,8 @@
             android:id="@+id/group"
             android:paddingTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:weightSum="2"
@@ -53,24 +57,23 @@
 
                 <TextView
                     android:id="@+id/txtScore"
-                    android:textColor="@color/textColor"
+                    android:layout_width="157dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:text="0"
-                    android:textSize="36sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:text="@string/_0"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColor"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/txtTotalQuestion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="190dp"
-                    android:text="1/30"
+                    android:text="@string/_1_30"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/textColor"
-                    android:textSize="36sp"
-                    android:layout_weight="0.29" />
+                    android:textSize="30sp" />
 
             </LinearLayout>
 
@@ -79,7 +82,7 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:max="5"
+                android:max="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -91,7 +94,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/buttonColor"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="Answer A"
+                android:text="@string/answer_a"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -105,7 +108,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/buttonColor"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="Answer B"
+                android:text="@string/answer_b"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -119,7 +122,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/buttonColor"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="Answer C"
+                android:text="@string/answer_c"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -133,7 +136,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/buttonColor"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="Answer D"
+                android:text="@string/answer_d"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -141,4 +144,5 @@
 
         </LinearLayout>
     </RelativeLayout>
+
 </RelativeLayout>
