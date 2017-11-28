@@ -25,16 +25,19 @@ import java.util.Locale;
 public class PlayingActivity extends AppCompatActivity implements View.OnClickListener {
 
     final static long INTERVAL=1000; //1 sec
-    final static long TIMEOUT=11000; //11 sec
+    final static long TIMEOUT=11000; //10 sec
     int progressValue=0;
 
+    TextToSpeech textToSpeech;
     CountDownTimer countDownTimer;
 
     int index=0,score=0,thisQuestion=0,totalQuestion,correctAnswer;
+    int result;
 
     ProgressBar progressBar;
     ImageView imgQuestion;
     Button btnA,btnB,btnC,btnD;
+    ImageButton imgBtnTextToSpeech;
     TextView txtScore,txtQuestionNum,txtQuestion;
 
     @Override
@@ -46,6 +49,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         txtQuestionNum=(TextView)findViewById(R.id.txtTotalQuestion);
         txtQuestion=(TextView)findViewById(R.id.txtQuestion);
         imgQuestion=(ImageView)findViewById(R.id.imgQuestion);
+        imgBtnTextToSpeech=(ImageButton)findViewById(R.id.imgBtnTextToSpeech);
 
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
 
@@ -59,6 +63,50 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         btnC.setOnClickListener(this);
         btnD.setOnClickListener(this);
 
+
+        textToSpeech=new TextToSpeech(PlayingActivity.this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status== TextToSpeech.SUCCESS)
+                {
+                    result=textToSpeech.setLanguage(Locale.UK);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Feature not supported in your device",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        imgBtnTextToSpeech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TTS(v);
+            }
+        });
+
+
+    }
+    public void TTS(View view) {
+        switch (view.getId()) {
+            case R.id.imgBtnTextToSpeech:
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(getApplicationContext(), "Feature not supported in your device", Toast.LENGTH_LONG).show();
+                } else {
+                    String text = txtQuestion.getText().toString();
+                    textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                }
+               // textToSpeech.stop();
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(textToSpeech!=null)
+        {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
     }
 
     @Override
@@ -105,6 +153,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
                         .into(imgQuestion);
                 imgQuestion.setVisibility(View.VISIBLE);
                 txtQuestion.setVisibility(View.INVISIBLE);
+                imgBtnTextToSpeech.setVisibility(View.INVISIBLE);
             }
             else
             {
@@ -112,6 +161,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
 
                 imgQuestion.setVisibility(View.INVISIBLE);
                 txtQuestion.setVisibility(View.VISIBLE);
+                imgBtnTextToSpeech.setVisibility(View.VISIBLE);
             }
             btnA.setText(Common.questionList.get(index).getAnswerA());
             btnB.setText(Common.questionList.get(index).getAnswerB());

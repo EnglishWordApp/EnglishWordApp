@@ -14,10 +14,16 @@ import com.elifakay.englishwordapp.R;
 
 public class RankingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    public TextView txtRSingleUserName,txtRSingleScore,txtSingleUserRanking;
+
     private ItemClickListener itemItemClickListener;
 
     public RankingViewHolder(View itemView) {
         super(itemView);
+
+        txtRSingleUserName=(TextView)itemView.findViewById(R.id.txtRSingleUserName);
+        txtRSingleScore=(TextView)itemView.findViewById(R.id.txtRSingleScore);
+        txtSingleUserRanking=(TextView)itemView.findViewById(R.id.txtSingleUserRanking);
 
         itemView.setOnClickListener(this);
     }

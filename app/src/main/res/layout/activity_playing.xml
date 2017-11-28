@@ -30,8 +30,7 @@
         android:textColor="@color/textColor"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:visibility="invisible"
-        tools:ignore="UnknownId" />
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"
@@ -144,5 +143,17 @@
 
         </LinearLayout>
     </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/imgBtnTextToSpeech"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/txtQuestion"
+        android:layout_alignEnd="@+id/imgQuestion"
+        android:background="@null"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/audio" />
 
 </RelativeLayout>

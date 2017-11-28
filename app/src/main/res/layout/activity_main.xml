@@ -8,10 +8,10 @@
 
     <ImageView
         android:layout_width="300dp"
-        android:layout_height="140dp"
-        android:src="@drawable/logo"
+        android:layout_height="150dp"
         android:layout_above="@+id/wraplogin"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo" />
 
     <RelativeLayout
         android:id="@+id/wraplogin"
@@ -46,6 +46,7 @@
                     android:drawablePadding="10dp"
                     android:hint="@string/user_name"
                     android:inputType="text"
+                    android:text="elif"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black"
                     android:textSize="20sp"
@@ -63,6 +64,7 @@
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:text="1234"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black"
                     android:textSize="20sp"

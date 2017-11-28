@@ -9,10 +9,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="score">Score</string>
-    <string name="answer_d">ANSWER D</string>
+    <string name="name">Name</string>
     <string name="_0">0</string>
     <string name="_1_30">1/30</string>
-    <string name="answer_a">ANSWER A</string>
-    <string name="answer_b">ANSWER B</string>
-    <string name="answer_c">ANSWER C</string>
+    <string name="answer_a">Answer A</string>
+    <string name="answer_b">Answer B</string>
+    <string name="answer_c">Answer C</string>
+    <string name="answer_d">Answer D</string>
+    <string name="rating">Rating</string>
 </resources>
