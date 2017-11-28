@@ -90,7 +90,7 @@ public class RankingFragment extends Fragment {
 
                 viewHolder.txtRSingleUserName.setText(model.getUserName());
                 viewHolder.txtRSingleScore.setText(String.valueOf(model.getScore()));
-                viewHolder.txtSingleUserRanking.setText(String.valueOf(adapter.getItemCount()-position));
+                //viewHolder.txtSingleUserRanking.setText(String.valueOf(adapter.getItemCount()-position));
 
                 viewHolder.setItemItemClickListener(new ItemClickListener() {
                     @Override
