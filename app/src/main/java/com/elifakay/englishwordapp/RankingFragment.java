@@ -1,12 +1,15 @@
 package com.elifakay.englishwordapp;
 
 import android.app.ProgressDialog;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,33 +17,36 @@ import android.widget.Toast;
 
 import com.elifakay.englishwordapp.Common.Common;
 import com.elifakay.englishwordapp.Interface.ItemClickListener;
-import com.elifakay.englishwordapp.Interface.RankingCallBack;
-import com.elifakay.englishwordapp.Model.QuestionScore;
-import com.elifakay.englishwordapp.Model.Ranking;
-import com.elifakay.englishwordapp.ViewHolder.RankingViewHolder;
+import com.elifakay.englishwordapp.Interface.RankCallBack;
+import com.elifakay.englishwordapp.Model.Rank;
+import com.elifakay.englishwordapp.Model.Users;
+import com.elifakay.englishwordapp.ViewHolder.RankViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class RankingFragment extends Fragment {
 
-    View myFragment;
+    private View myFragment;
 
-    RecyclerView rankingList;
-    LinearLayoutManager layoutManager;
-    FirebaseRecyclerAdapter<Ranking, RankingViewHolder> adapter;
+    private RecyclerView rankingList;
+    private LinearLayoutManager layoutManager;
+    private FirebaseRecyclerAdapter<Rank, RankViewHolder> adapter;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference updateRankingRef;
-    DatabaseReference questionScoreRef, rankingRef;
-
-    int sum = 0;
+    private FirebaseUser mCurrentUser;
+    private DatabaseReference mRankingDatabase,mUpdateRankingDatabase,mUserDatabase;
 
     private ProgressDialog mProgress;
 
@@ -53,15 +59,11 @@ public class RankingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        questionScoreRef = firebaseDatabase.getReference("QuestionScore");
-        rankingRef = firebaseDatabase.getReference("Ranking");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
         myFragment = inflater.inflate(R.layout.fragment_ranking, container, false);
 
         rankingList = (RecyclerView) myFragment.findViewById(R.id.rankingList);
@@ -80,29 +82,39 @@ public class RankingFragment extends Fragment {
         mProgress.setMessage("Please wait while ranking user");
         mProgress.show();
 
-        updateScore(Common.currentUser.getUserName(), new RankingCallBack<Ranking>() {
+        //Firebase
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String currentUId = mCurrentUser.getUid();
+
+        mRankingDatabase = FirebaseDatabase.getInstance().getReference().child("Ranking");
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUId);
+
+        saveUserRank(currentUId, new RankCallBack<Rank>() {
             @Override
-            public void callBack(Ranking ranking) {
-                rankingRef.child(ranking.getUserName()).setValue(ranking);
+            public void callBack(Rank rank) {
+                mRankingDatabase.child(currentUId).setValue(rank);
                 // showRanking();
             }
         });
 
-        adapter = new FirebaseRecyclerAdapter<Ranking, RankingViewHolder>(
-                Ranking.class,
-                R.layout.ranking_single_layout,
-                RankingViewHolder.class,
-                rankingRef.orderByChild("score")
+        adapter = new FirebaseRecyclerAdapter<Rank, RankViewHolder>(
+                Rank.class,
+                R.layout.rank_single_layout,
+                RankViewHolder.class,
+                mRankingDatabase.orderByChild("score")
         ) {
             @Override
-            protected void populateViewHolder(RankingViewHolder viewHolder, Ranking model, int position) {
+            protected void populateViewHolder(RankViewHolder viewHolder, Rank model, int position) {
 
-                viewHolder.txtRSingleUserName.setText(model.getUserName());
-                viewHolder.txtRSingleScore.setText(String.valueOf(model.getScore()));
-                viewHolder.txtSingleUserRanking.setText(String.valueOf(model.getRanking()));
+                viewHolder.txtRankSingleUserName.setText(model.getName());
+                viewHolder.txtRankSingleScore.setText(String.valueOf(model.getScore()));
+                viewHolder.txtRankSingle.setText(String.valueOf(model.getRank()));
 
-                long rankingNumber=Long.valueOf(adapter.getItemCount()-position);
-                updateRanking(model.getUserName(),rankingNumber);
+                String b=model.getName();
+                int a=adapter.getItemCount();
+
+                long rankingNumber = Long.valueOf(adapter.getItemCount() - position);
+                updateRanking(currentUId, rankingNumber);
 
                 viewHolder.setItemItemClickListener(new ItemClickListener() {
                     @Override
@@ -118,17 +130,18 @@ public class RankingFragment extends Fragment {
         return myFragment;
     }
 
-    private void updateScore(final String userName, final RankingCallBack<Ranking> callBack) {
+    private void saveUserRank(String currentUId, final RankCallBack<Rank> rankCallBack) {
 
-        questionScoreRef.orderByChild("user").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+        //User information
+        mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    QuestionScore questionScore = data.getValue(QuestionScore.class);
-                    sum += Integer.parseInt(questionScore.getScore());
-                }
-                Ranking ranking = new Ranking(userName, sum);
-                callBack.callBack(ranking);
+
+                String name = dataSnapshot.child("name").getValue().toString();
+                String score=dataSnapshot.child("score").getValue().toString();
+
+                Rank ranking = new Rank(name,Long.parseLong(score));
+                rankCallBack.callBack(ranking);
             }
 
             @Override
@@ -138,10 +151,10 @@ public class RankingFragment extends Fragment {
         });
     }
 
-    private void updateRanking(String userName,long userRanking) {
+    private void updateRanking(String currentUId, long userRank) {
 
-        updateRankingRef = FirebaseDatabase.getInstance().getReference().child("Ranking").child(userName);
-        updateRankingRef.child("ranking").setValue(userRanking).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mUpdateRankingDatabase = FirebaseDatabase.getInstance().getReference().child("Ranking").child(currentUId);
+        mUpdateRankingDatabase.child("rank").setValue(userRank).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

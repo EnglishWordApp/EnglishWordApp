@@ -14,57 +14,87 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elifakay.englishwordapp.Common.Common;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.Locale;
 
-public class PlayingActivity extends AppCompatActivity implements View.OnClickListener {
+public class PlayActivity extends AppCompatActivity implements View.OnClickListener {
 
     final static long INTERVAL=1000; //1 sec
     final static long TIMEOUT=11000; //10 sec
     int progressValue=0;
 
-    TextToSpeech textToSpeech;
-    CountDownTimer countDownTimer;
+    private TextToSpeech textToSpeech;
+    private CountDownTimer countDownTimer;
 
     int index=0,score=0,thisQuestion=0,totalQuestion,correctAnswer;
     int result;
+    String oldScore="0";
 
-    ProgressBar progressBar;
-    ImageView imgQuestion;
-    Button btnA,btnB,btnC,btnD;
-    ImageButton imgBtnTextToSpeech;
-    TextView txtScore,txtQuestionNum,txtQuestion;
+    private ProgressBar progressBar;
+
+    private ImageView imgPlayQuestion;
+    private ImageButton imgBtnTextToSpeech;
+    private TextView txtPlayQuestion,txtPlayScore,txtPlayTotalQuestion;
+    private Button btnAnswerA,btnAnswerB,btnAnswerC,btnAnswerD;
+
+    private DatabaseReference mUserDatabase;
+    private FirebaseUser mCurrentUser;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playing);
+        setContentView(R.layout.activity_play);
 
-        txtScore=(TextView)findViewById(R.id.txtScore);
-        txtQuestionNum=(TextView)findViewById(R.id.txtTotalQuestion);
-        txtQuestion=(TextView)findViewById(R.id.txtQuestion);
-        imgQuestion=(ImageView)findViewById(R.id.imgQuestion);
+        //Firebase
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUId = mCurrentUser.getUid();
+
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUId);
+
+        mUserDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                oldScore=dataSnapshot.child("score").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //Android
+        imgPlayQuestion=(ImageView)findViewById(R.id.imgPlayQuestion);
         imgBtnTextToSpeech=(ImageButton)findViewById(R.id.imgBtnTextToSpeech);
+        txtPlayQuestion=(TextView)findViewById(R.id.txtPlayQuestion);
+        txtPlayScore=(TextView)findViewById(R.id.txtPlayScore);
+        txtPlayTotalQuestion=(TextView)findViewById(R.id.txtPlayTotalQuestion);
 
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
 
-        btnA=(Button)findViewById(R.id.btnAnswerA);
-        btnB=(Button)findViewById(R.id.btnAnswerB);
-        btnC=(Button)findViewById(R.id.btnAnswerC);
-        btnD=(Button)findViewById(R.id.btnAnswerD);
-
-        btnA.setOnClickListener(this);
-        btnB.setOnClickListener(this);
-        btnC.setOnClickListener(this);
-        btnD.setOnClickListener(this);
+        btnAnswerA=(Button)findViewById(R.id.btnAnswerA);
+        btnAnswerB=(Button)findViewById(R.id.btnAnswerB);
+        btnAnswerC=(Button)findViewById(R.id.btnAnswerC);
+        btnAnswerD=(Button)findViewById(R.id.btnAnswerD);
 
 
-        textToSpeech=new TextToSpeech(PlayingActivity.this, new TextToSpeech.OnInitListener() {
+        btnAnswerA.setOnClickListener(this);
+        btnAnswerB.setOnClickListener(this);
+        btnAnswerC.setOnClickListener(this);
+        btnAnswerD.setOnClickListener(this);
+
+        textToSpeech=new TextToSpeech(PlayActivity.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status== TextToSpeech.SUCCESS)
@@ -82,8 +112,6 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
                 TTS(v);
             }
         });
-
-
     }
     public void TTS(View view) {
         switch (view.getId()) {
@@ -91,10 +119,10 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
                 if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                     Toast.makeText(getApplicationContext(), "Feature not supported in your device", Toast.LENGTH_LONG).show();
                 } else {
-                    String text = txtQuestion.getText().toString();
+                    String text = txtPlayQuestion.getText().toString();
                     textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                 }
-               // textToSpeech.stop();
+                // textToSpeech.stop();
                 break;
         }
     }
@@ -118,7 +146,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
             if(btnClicked.getText().equals(Common.questionList.get(index).getCorrectAnswer()))
             {
                 //Choose correct answer
-                score+=10;
+                score+=2;
                 correctAnswer++;
                 showQuestion(++index);
             }else
@@ -129,11 +157,12 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
                 dataSend.putInt("SCORE",score);
                 dataSend.putInt("TOTAL",totalQuestion);
                 dataSend.putInt("CORRECT",correctAnswer);
+                dataSend.putString("OLDSCORE",oldScore);
                 intent.putExtras(dataSend);
                 startActivity(intent);
                 finish();
             }
-            txtScore.setText(String.format("%d",score));
+            txtPlayScore.setText(String.format("%d",score));
         }
     }
 
@@ -142,7 +171,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
         if(index<totalQuestion)
         {
             thisQuestion++;
-            txtQuestionNum.setText(String.format("%d / %d",thisQuestion,totalQuestion));
+            txtPlayTotalQuestion.setText(String.format("%d / %d",thisQuestion,totalQuestion));
             progressBar.setProgress(0);
             progressValue=0;
 
@@ -150,23 +179,23 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
             {
                 Picasso.with(getBaseContext())
                         .load(Common.questionList.get(index).getQuestion())
-                        .into(imgQuestion);
-                imgQuestion.setVisibility(View.VISIBLE);
-                txtQuestion.setVisibility(View.INVISIBLE);
+                        .into(imgPlayQuestion);
+                imgPlayQuestion.setVisibility(View.VISIBLE);
+                txtPlayQuestion.setVisibility(View.INVISIBLE);
                 imgBtnTextToSpeech.setVisibility(View.INVISIBLE);
             }
             else
             {
-                txtQuestion.setText(Common.questionList.get(index).getQuestion());
+                txtPlayQuestion.setText(Common.questionList.get(index).getQuestion());
 
-                imgQuestion.setVisibility(View.INVISIBLE);
-                txtQuestion.setVisibility(View.VISIBLE);
+                imgPlayQuestion.setVisibility(View.INVISIBLE);
+                txtPlayQuestion.setVisibility(View.VISIBLE);
                 imgBtnTextToSpeech.setVisibility(View.VISIBLE);
             }
-            btnA.setText(Common.questionList.get(index).getAnswerA());
-            btnB.setText(Common.questionList.get(index).getAnswerB());
-            btnC.setText(Common.questionList.get(index).getAnswerC());
-            btnD.setText(Common.questionList.get(index).getAnswerD());
+            btnAnswerA.setText(Common.questionList.get(index).getAnswerA());
+            btnAnswerB.setText(Common.questionList.get(index).getAnswerB());
+            btnAnswerC.setText(Common.questionList.get(index).getAnswerC());
+            btnAnswerD.setText(Common.questionList.get(index).getAnswerD());
 
             countDownTimer.start(); //Start Time
         }
@@ -178,6 +207,7 @@ public class PlayingActivity extends AppCompatActivity implements View.OnClickLi
             dataSend.putInt("SCORE",score);
             dataSend.putInt("TOTAL",totalQuestion);
             dataSend.putInt("CORRECT",correctAnswer);
+            dataSend.putString("OLDSCORE",oldScore);
             intent.putExtras(dataSend);
             startActivity(intent);
             finish();

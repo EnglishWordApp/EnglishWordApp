@@ -4,52 +4,48 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.elifakay.englishwordapp.Common.Common;
-import com.elifakay.englishwordapp.Model.Question;
+import com.elifakay.englishwordapp.Model.Questions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-/**
- * Created by elf_4 on 26.10.2017.
- */
 
-public class StartFragment extends Fragment {
+public class StartPlayFragment extends Fragment {
 
     View myFragment;
+
     Button btnPlay;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseRefQuestions;
+    DatabaseReference mQuestionsDatabase;
 
-    public static StartFragment newInstance() {
-        StartFragment startFragment = new StartFragment();
-        return startFragment;
+    public static StartPlayFragment newInstance() {
+        StartPlayFragment startPlayFragment = new StartPlayFragment();
+        return startPlayFragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseRefQuestions = firebaseDatabase.getReference("Questions");
-
+        mQuestionsDatabase = FirebaseDatabase.getInstance().getReference().child("Questions");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myFragment = inflater.inflate(R.layout.fragment_start, container, false);
+        myFragment = inflater.inflate(R.layout.fragment_start_play, container, false);
 
         loadQuestions();
 
@@ -57,7 +53,7 @@ public class StartFragment extends Fragment {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PlayingActivity.class);
+                Intent intent = new Intent(getActivity(), PlayActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,21 +66,21 @@ public class StartFragment extends Fragment {
         if (Common.questionList.size() > 0)
             Common.questionList.clear();
 
-        databaseRefQuestions.addValueEventListener(new ValueEventListener() {
+        mQuestionsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Question ques = postSnapshot.getValue(Question.class);
+                    Questions ques = postSnapshot.getValue(Questions.class);
                     Common.questionList.add(ques);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
         //Random List
-        //Collections.shuffle(Common.questionList);
+        Collections.shuffle(Common.questionList);
     }
 }
-
