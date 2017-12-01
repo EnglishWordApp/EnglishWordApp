@@ -1,8 +1,56 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.elifakay.englishwordapp.ProfileFragment">
 
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/txtProfileScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score_0"
+        android:textColor="#4254A6"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtProfileRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/ranking_0"
+        android:textColor="#4254A6"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/txtProfileScore"
+        android:layout_alignStart="@+id/txtProfileScore" />
+
+    <TextView
+        android:id="@+id/txtProfileUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="252dp"
+        android:text="@string/user_name"
+        android:textColor="#4254A6"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtProfileUserName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription=""
+        android:padding="30dp"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>
