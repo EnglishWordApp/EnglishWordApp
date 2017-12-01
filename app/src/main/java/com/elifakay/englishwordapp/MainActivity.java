@@ -1,34 +1,35 @@
 package com.elifakay.englishwordapp;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.elifakay.englishwordapp.Common.Common;
-import com.elifakay.englishwordapp.Model.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    MaterialEditText edtNewUserName, edtNewPassword, edtNewEmail;
-    MaterialEditText edtUserName, edtPassword;
+    private Button btnSignIn,btnSignUp;
+    private EditText edtEmail,edtPassword;
+    private TextView txtResetPassword;
 
-    Button btnSignUp, btnSignIn;
+    private ProgressDialog mLoginProgress;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference usersRef;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mUserDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,111 +37,102 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Firebase
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        usersRef = firebaseDatabase.getReference("Users");
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        }
 
-        edtUserName = (MaterialEditText) findViewById(R.id.edtUserName);
-        edtPassword = (MaterialEditText) findViewById(R.id.edtPassword);
+        //ProgressDialog
+        mLoginProgress = new ProgressDialog(this);
 
-        btnSignIn = (Button) findViewById(R.id.btnSignIn);
-        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        //Android
+        edtEmail=(EditText)findViewById(R.id.edtEmail);
+        edtPassword=(EditText)findViewById(R.id.edtPassword);
+        txtResetPassword=(TextView)findViewById(R.id.txtResetPassword);
+        btnSignUp=(Button)findViewById(R.id.btnSignUp);
+        btnSignIn=(Button)findViewById(R.id.btnSignIn);
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSignUpDialog();
-            }
-        });
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn(edtUserName.getText().toString(),edtPassword.getText().toString());
-            }
-        });
-    }
+                String email = edtEmail.getText().toString();
+                String password = edtPassword.getText().toString();
 
-    private void signIn(final String user, final String pwd) {
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(user).exists()) {
-                    if (!user.isEmpty()) {
+                if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
+                    mLoginProgress.setTitle("Logging In");
+                    mLoginProgress.setMessage("Please wait while we check your credentials");
+                    mLoginProgress.setCanceledOnTouchOutside(false);
+                    mLoginProgress.show();
 
-                        User login = dataSnapshot.child(user).getValue(User.class);
-                        if (login.getPassword().equals(pwd))
-                        {
-                            Intent homeActivity=new Intent(MainActivity.this,HomeActivity.class);
-                            Common.currentUser=login;
-                            startActivity(homeActivity);
-                            finish();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Check your password !", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(MainActivity.this, "Please enter your username", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "User not available", Toast.LENGTH_LONG).show();
+                    LoginUser(email, password);
                 }
             }
+        });
 
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onClick(View v) {
+                Intent register = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(register);
+                finish();
+            }
+        });
 
+        txtResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent changePassword = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                startActivity(changePassword);
+                finish();
             }
         });
 
     }
 
-    private void showSignUpDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-        alertDialog.setTitle("Register");
-        alertDialog.setMessage("Please fill in all the information");
+    private void LoginUser(String email, String password) {
 
-        LayoutInflater inflater = this.getLayoutInflater();
-        View sing_up_layout = inflater.inflate(R.layout.sign_up_layout, null);
-
-        edtNewUserName = (MaterialEditText) sing_up_layout.findViewById(R.id.edtNewUserName);
-        edtNewPassword = (MaterialEditText) sing_up_layout.findViewById(R.id.edtNewPassword);
-        edtNewEmail = (MaterialEditText) sing_up_layout.findViewById(R.id.edtNewEmail);
-
-        alertDialog.setView(sing_up_layout);
-        alertDialog.setIcon(R.drawable.ic_person_black_24dp);
-
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful())
+                {
+                    mLoginProgress.dismiss();
+
+                    FirebaseUser currenUser=mAuth.getCurrentUser();
+                    String currentUId = currenUser.getUid();
+
+                    mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUId);
+                    mUserDatabase.keepSynced(true);
+
+                    Intent homeIntent=new Intent(MainActivity.this,HomeActivity.class);
+                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(homeIntent);
+                    finish();
+
+                } else
+                {
+                    mLoginProgress.hide();
+                    Toast.makeText(MainActivity.this,"Cannot Sign in.Please check the from and try again.",Toast.LENGTH_LONG).show();
+                }
             }
         });
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                final User user = new User(edtNewUserName.getText().toString(),
-                        edtNewPassword.getText().toString(),
-                        edtNewEmail.getText().toString());
-                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child(user.getUserName()).exists())
-                        {
-                            Toast.makeText(MainActivity.this,"User already exists !",Toast.LENGTH_SHORT).show();
-                        }else{
-                            usersRef.child(user.getUserName()).setValue(user);
-                            Toast.makeText(MainActivity.this,"User registration successful",Toast.LENGTH_SHORT).show();
-                        }
-                    }
+    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                dialogInterface.dismiss();
-            }
-        });
-        alertDialog.show();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Check if user signed in and update UI accordingly
+        FirebaseUser currenUser=mAuth.getCurrentUser();
+        if(currenUser != null)
+        {
+            sendToStart();
+        }
+    }
+    private void sendToStart() {
+        Intent startIntent=new Intent(MainActivity.this,HomeActivity.class);
+        startActivity(startIntent);
+        finish();
     }
 }
-

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 public class HomeActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +28,10 @@ public class HomeActivity extends AppCompatActivity {
                         selectedFragment = ProfileFragment.newInstance();
                         break;
                     case R.id.action_start:
-                        selectedFragment = StartFragment.newInstance();
+                        selectedFragment = StartPlayFragment.newInstance();
                         break;
                     case R.id.action_ranking:
                         selectedFragment = RankingFragment.newInstance();
-                        break;
-                    case R.id.action_about:
-                        selectedFragment = AboutFragment.newInstance();
                         break;
                 }
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -48,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setDefaultFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, StartFragment.newInstance());
+        transaction.replace(R.id.frame_layout, StartPlayFragment.newInstance());
         transaction.commit();
     }
 }
