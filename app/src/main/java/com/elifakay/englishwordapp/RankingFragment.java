@@ -106,6 +106,7 @@ public class RankingFragment extends Fragment {
 
         return myFragment;
     }
+    //Score güncelleme iþlemi
     private void updateScore(final String userName, final RankingCallBack<Ranking> callBack) {
 
         questionScoreRef.orderByChild("user").equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
