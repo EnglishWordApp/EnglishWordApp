@@ -1,15 +1,14 @@
 package com.elifakay.englishwordapp.Common;
 
-import com.elifakay.englishwordapp.Model.Question;
-import com.elifakay.englishwordapp.Model.User;
+import com.elifakay.englishwordapp.Model.Questions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by elf_4 on 24.10.2017.
+ * Created by elf_4 on 30.11.2017.
  */
+
 public class Common {
-    public static User currentUser;
-    public static List<Question> questionList=new ArrayList<>();
+    public static List<Questions> questionList=new ArrayList<>();
 }
