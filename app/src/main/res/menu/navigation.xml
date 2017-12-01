@@ -6,13 +6,13 @@
     <item
         android:id="@+id/action_start"
         android:enabled="true"
-        android:icon="@drawable/ic_library_books_black_24dp"
-        android:title="Start"
+        android:icon="@drawable/ic_play_arrow_black_24dp"
+        android:title="@string/play"
         tools:ignore="MenuTitle,UnusedAttribute" />
     <item
         android:id="@+id/action_profile"
         android:enabled="true"
-        android:title="Profile"
+        android:title="@string/profile"
         android:icon="@drawable/ic_person_black_24dp"
         app:showAsAction="ifRoom"
         tools:ignore="MenuTitle,UnusedAttribute" />
@@ -20,12 +20,6 @@
         android:id="@+id/action_ranking"
         android:enabled="true"
         android:icon="@drawable/ic_star_black_24dp"
-        android:title="Ranking"
-        tools:ignore="MenuTitle,UnusedAttribute" />
-    <item
-        android:id="@+id/action_about"
-        android:enabled="true"
-        android:icon="@drawable/ic_info_black_24dp"
-        android:title="About"
+        android:title="@string/ranking"
         tools:ignore="MenuTitle,UnusedAttribute" />
 </menu>

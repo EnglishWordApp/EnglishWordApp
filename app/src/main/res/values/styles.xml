@@ -7,12 +7,5 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="MyLoginButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="backgroundTint">@android:color/white</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
 
-    <style name="MyButton" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">#4860CE</item> <!--#1CB3BC -->
-    </style>
 </resources>

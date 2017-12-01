@@ -1,20 +1,35 @@
 <resources>
-    <string name="app_name">EnglishWordApp</string>
+    <string name="app_name">English Word Power</string>
+    <string name="start">START</string>
+    <string name="register">Register</string>
+    <string name="reg_ster">Regıster</string>
+    <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
-    <string name="email">Email</string>
+    <string name="please_fill_in_all_the_information">Please fill in all the information</string>
     <string name="user_name">User Name</string>
-    <string name="sign_in">SIGN IN</string>
-    <string name="sign_up">SIGN UP</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="play">Play</string>
+    <string name="profile">Profile</string>
+    <string name="ranking">Ranking</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="s_gn_n">sıgn ın</string>
+    <string name="s_gn_up">sıgn up</string>
+    <string name="reset_it">Reset it</string>
     <string name="score">Score</string>
-    <string name="name">Name</string>
     <string name="_0">0</string>
-    <string name="_1_30">1/30</string>
+    <string name="_1_30">1 / 30</string>
     <string name="answer_a">Answer A</string>
+    <string name="answer_d">Answer D</string>
     <string name="answer_b">Answer B</string>
     <string name="answer_c">Answer C</string>
-    <string name="answer_d">Answer D</string>
-    <string name="rating">Rating</string>
+    <string name="play_again">PLAY AGAIN</string>
+    <string name="passed_1_30">Passed : 1 / 30</string>
+    <string name="score_0">Score : 0</string>
+    <string name="name">Name</string>
+    <string name="change">Change</string>
 </resources>
