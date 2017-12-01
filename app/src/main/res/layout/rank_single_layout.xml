@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="45dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     android:padding="16dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0.5dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,36 +22,37 @@
         android:weightSum="10">
 
         <TextView
-            android:id="@+id/txtSingleUserRanking"
+            android:id="@+id/txtRankSingle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating"
+            android:text="@string/ranking"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorPrimary"
-            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtRSingleUserName"
+            android:id="@+id/txtRankSingleUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="8.56"
             android:text="@string/user_name"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
-            android:id="@+id/txtRSingleScore"
+            android:id="@+id/txtRankSingleScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.87"
             android:text="@string/score"
-            android:textColor="@color/colorPrimary"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_weight="0.87" />
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

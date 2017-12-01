@@ -5,32 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.elifakay.englishwordapp.PlayingActivity">
+    android:background="@drawable/background"
+    tools:context="com.elifakay.englishwordapp.PlayActivity">
 
     <ImageView
-        android:id="@+id/imgQuestion"
+        android:id="@+id/imgPlayQuestion"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="54dp"
         android:gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
         tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/txtQuestion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/relativeLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp"
-        android:layout_toStartOf="@+id/imgBtnTextToSpeech"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:textColor="@color/textColor"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:visibility="invisible" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"
@@ -55,24 +42,26 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/txtScore"
+                    android:id="@+id/txtPlayScore"
                     android:layout_width="157dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/_0"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/textColor"
-                    android:textSize="30sp" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtTotalQuestion"
+                    android:id="@+id/txtPlayTotalQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="@string/_1_30"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/textColor"
-                    android:textSize="30sp" />
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -87,73 +76,80 @@
 
             <Button
                 android:id="@+id/btnAnswerA"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
                 android:layout_margin="8dp"
-                android:background="@color/buttonColor"
+                android:background="@drawable/button"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/answer_a"
+                android:text="Answer A"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
-                android:theme="@style/MyButton" />
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnAnswerB"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_margin="8dp"
-                android:background="@color/buttonColor"
+                android:background="@drawable/button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/answer_b"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:theme="@style/MyButton" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnAnswerC"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_margin="8dp"
-                android:background="@color/buttonColor"
+                android:background="@drawable/button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/answer_c"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:theme="@style/MyButton" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnAnswerD"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_margin="8dp"
-                android:background="@color/buttonColor"
+                android:background="@drawable/button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/answer_d"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:theme="@style/MyButton" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtPlayQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/imgPlayQuestion"
+        android:layout_alignStart="@+id/relativeLayout"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/imgBtnTextToSpeech"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/txtQuestion"
-        android:layout_alignEnd="@+id/imgQuestion"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/imgPlayQuestion"
         android:background="@null"
-        android:padding="5dp"
+        android:elevation="0dp"
         android:scaleType="fitXY"
         android:visibility="invisible"
-        app:srcCompat="@drawable/audio" />
+        app:srcCompat="@drawable/audio"
+        tools:ignore="ContentDescription" />
 
 </RelativeLayout>
