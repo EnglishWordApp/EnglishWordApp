@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="com.elifakay.englishwordapp.HomeActivity">
 
     <FrameLayout
@@ -19,14 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/textColor"
+        android:background="@color/colorDefault"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/bottom_menu"
+        app:menu="@menu/navigation"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="259dp"
         tools:layout_editor_absoluteY="33dp" />
-
-
 
 </RelativeLayout>
