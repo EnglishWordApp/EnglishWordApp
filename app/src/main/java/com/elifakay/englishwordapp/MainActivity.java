@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent register = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(register);
-                finish();
+
             }
         });
 
