@@ -108,7 +108,7 @@ public class RankingFragment extends Fragment {
 
                 viewHolder.txtRankSingleUserName.setText(model.getName());
                 viewHolder.txtRankSingleScore.setText(String.valueOf(model.getScore()));
-                viewHolder.txtRankSingle.setText(String.valueOf(model.getRank()));
+                //viewHolder.txtRankSingle.setText(String.valueOf(model.getRank()));
 
                 String b=model.getName();
                 int a=adapter.getItemCount();

@@ -23,23 +23,14 @@
         android:weightSum="10">
 
         <TextView
-            android:id="@+id/txtRankSingle"
+            android:id="@+id/txtRankSingleUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ranking"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtRankSingleUserName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="8.56"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="2.36"
             android:text="@string/user_name"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -49,8 +40,11 @@
             android:id="@+id/txtRankSingleScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.87"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_weight="5.45"
             android:text="@string/score"
+            android:textAlignment="textEnd"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

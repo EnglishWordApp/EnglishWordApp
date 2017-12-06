@@ -1,5 +1,6 @@
 package com.elifakay.englishwordapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +47,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getApplicationContext(), "The password reset link has been sent to your email", Toast.LENGTH_LONG).show();
-                                         edtChangeEmail.setText("");
+                                        edtChangeEmail.setText("");
+                                        Intent mainIntent = new Intent(ChangePasswordActivity.this, MainActivity.class);
+                                        startActivity(mainIntent);
+                                        finish();
                                     }
                                 }
                             });

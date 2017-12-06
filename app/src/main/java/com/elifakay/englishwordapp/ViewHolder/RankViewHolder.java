@@ -14,7 +14,7 @@ import com.elifakay.englishwordapp.R;
 
 public class RankViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txtRankSingleUserName,txtRankSingleScore,txtRankSingle;
+    public TextView txtRankSingleUserName,txtRankSingleScore;//txtRankSingle;
 
     private ItemClickListener itemItemClickListener;
 
@@ -23,7 +23,7 @@ public class RankViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         txtRankSingleUserName=(TextView)itemView.findViewById(R.id.txtRankSingleUserName);
         txtRankSingleScore=(TextView)itemView.findViewById(R.id.txtRankSingleScore);
-        txtRankSingle=(TextView)itemView.findViewById(R.id.txtRankSingle);
+        //txtRankSingle=(TextView)itemView.findViewById(R.id.txtRankSingle);
 
         itemView.setOnClickListener(this);
     }
