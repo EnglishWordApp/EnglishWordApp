@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
                     LoginUser(email, password);
                 }
+                else{
+                    Toast.makeText(getApplicationContext(),"Please fill in all the information!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
