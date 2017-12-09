@@ -55,14 +55,21 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = edtNewEmail.getText().toString();
                 String password = edtNewPassword.getText().toString();
 
-                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
-                    mRegisterProgress.setTitle("Registering User");
-                    mRegisterProgress.setMessage("Please wait while we create your account !");
-                    mRegisterProgress.setCanceledOnTouchOutside(false);
-                    mRegisterProgress.show();
+                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password))
+                {
+                    if(password.length() >= 6)
+                    {
+                        mRegisterProgress.setTitle("Registering User");
+                        mRegisterProgress.setMessage("Please wait while we create your account !");
+                        mRegisterProgress.setCanceledOnTouchOutside(false);
+                        mRegisterProgress.show();
 
-                    RegisterUser(name, email, password);
-
+                        RegisterUser(name, email, password);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"The password must be at least 6 characters",Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                      Toast.makeText(getApplicationContext(),"Please fill in all the information",Toast.LENGTH_SHORT).show();
                 }
