@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/gradient"
     tools:context="com.elifakay.englishwordapp.StartPlayFragment">
 
     <ImageView
@@ -14,7 +14,8 @@
         android:layout_marginTop="41dp"
         app:srcCompat="@drawable/logomavi"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/btnPlay"
@@ -35,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="English Word"
+        android:text="@string/english_word"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="35sp"
@@ -47,7 +48,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Power"
+        android:text="@string/power"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="35sp"

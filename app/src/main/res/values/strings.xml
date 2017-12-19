@@ -32,4 +32,6 @@
     <string name="score_0">Score : 0</string>
     <string name="name">Name</string>
     <string name="change">Change</string>
+    <string name="english_word">English Word</string>
+    <string name="power">Power</string>
 </resources>
