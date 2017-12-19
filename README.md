@@ -5,7 +5,7 @@ Sakarya Üniversitesi Bilgisayar Mühendisliği / Finansal BT Yönetimi Dersi
 
 B141210300 - ELİF AKAY 
 
-B14010230  -  ZEYNEP SÜMEYYE KURT
+B141210030  -  ZEYNEP SÜMEYYE KURT
 
 B141210011 - FATIMA NİSANUR KONAK 
 
