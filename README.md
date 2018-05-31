@@ -27,14 +27,10 @@ Analiz Dokümanı
 
 Veritabanı Tablo Diyagramı
 
-Mobil Uygulama Geliştirme
-
 __________________________________
 
 FATIMA NİSANUR KONAK
 
 Test Senaryoları Dokümanı
-
-Mobil Uygulama Geliştirme
 
 __________________________________
